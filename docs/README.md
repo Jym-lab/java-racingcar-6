@@ -9,7 +9,7 @@
    3. move시 동작 구현 (move)
 2. Race 클래스
    1. move 메서드 실행하는 메서드 (StartRace)
-   2. 입력 받은 값 만큼 Car 인스턴스를 생성하는 메서드 (CarGenerator)
+   2. 입력 받은 값 만큼 Car 인스턴스를 생성하고 리스트에 추가하는 메서드 (Race 생성자)
 3. Input 클래스
    1. 실제로 자동차 이름을 입력을 받는 메서드 (getCarNames)
    2. 라운드 횟수 입력 받는 메서드 (getRound)

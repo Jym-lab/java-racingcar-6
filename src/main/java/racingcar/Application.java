@@ -1,6 +1,11 @@
 package racingcar;
 
 
+import camp.nextstep.edu.missionutils.Randoms;
+
+import java.util.ArrayList;
+import java.util.List;
+
 class Car {
     private String name;
     private int position;
@@ -20,6 +25,27 @@ class Car {
 
     public int getPosition() {
         return position;
+    }
+}
+
+class Race{
+    private List<Car> cars;
+
+    public Race(String[] carNames) {
+        cars = new ArrayList<>();
+        for (String name : carNames){
+            cars.add(new Car(name));
+        }
+    }
+
+    public void StartRace(){
+        for (Car car : cars){
+            car.move(Randoms.pickNumberInRange(0, 9));
+        }
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 }
 
