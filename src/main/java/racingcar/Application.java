@@ -54,12 +54,14 @@ class Input {
     public String[] getCarNames(){
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String[] carNames = Console.readLine().split(",");
+        ExceptionChecker.checkCarNames(carNames);
         return carNames;
     }
     public int getRound() {
         System.out.println("시도할 회수는 몇회인가요?");
-        int round = Integer.parseInt(Console.readLine());
-        return round;
+        String round = Console.readLine();
+        int roundNum = ExceptionChecker.checkRound(round);
+        return roundNum;
     }
 }
 
@@ -94,6 +96,24 @@ class Result {
             } else {
                 System.out.print(car + ", ");
             }
+        }
+    }
+}
+
+class ExceptionChecker {
+    public static void checkCarNames(String[] carNames){
+        for (String name : carNames){
+            if (name.length() >= 5){
+                throw new IllegalArgumentException("The car name is longer than 5 characters.");
+            }
+        }
+    }
+
+    public static int checkRound(String round){
+        try{
+            return Integer.parseInt(round);
+        } catch (NumberFormatException e){
+            throw new IllegalArgumentException("The input round value is not a number!");
         }
     }
 }
