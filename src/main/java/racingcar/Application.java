@@ -1,6 +1,7 @@
 package racingcar;
 
 
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ class Race{
         }
     }
 
-    public void StartRace(){
+    public void startRace(){
         for (Car car : cars){
             car.move(Randoms.pickNumberInRange(0, 9));
         }
@@ -46,6 +47,19 @@ class Race{
 
     public List<Car> getCars() {
         return cars;
+    }
+}
+
+class Input {
+    public String[] getCarNames(){
+        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
+        String[] carNames = Console.readLine().split(",");
+        return carNames;
+    }
+    public int getRound() {
+        System.out.println("시도할 회수는 몇회인가요?");
+        int round = Integer.parseInt(Console.readLine());
+        return round;
     }
 }
 
