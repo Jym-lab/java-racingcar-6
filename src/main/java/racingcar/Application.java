@@ -72,7 +72,7 @@ class Result {
         }
         System.out.println();
     }
-    public static void winnerDeter(List<Car> cars){
+    public static List<Car> winnerDeter(List<Car> cars){
         int max = -1;
         List<Car> winner = new ArrayList<>();
         for (Car car : cars){
@@ -85,16 +85,16 @@ class Result {
                 winner.add(car);
             }
         }
-        printWinner(winner);
+        return winner;
     }
-    private static void printWinner(List<Car> cars){
+    public static void printWinner(List<Car> cars){
         System.out.print("최종 우승자 : ");
         for (int i = 0; i < cars.size(); i++){
             Car car = cars.get(i);
             if (i == cars.size() - 1){
-                System.out.println(car);
+                System.out.println(car.getName());
             } else {
-                System.out.print(car + ", ");
+                System.out.print(car.getName() + ", ");
             }
         }
     }
@@ -103,7 +103,7 @@ class Result {
 class ExceptionChecker {
     public static void checkCarNames(String[] carNames){
         for (String name : carNames){
-            if (name.length() >= 5){
+            if (name.length() > 5){
                 throw new IllegalArgumentException("The car name is longer than 5 characters.");
             }
         }
@@ -120,6 +120,16 @@ class ExceptionChecker {
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Input input = new Input();
+        String[] carNames = input.getCarNames();
+        int round = input.getRound();
+
+        Race race = new Race(carNames);
+        for (int i = 0; i < round; i++){
+            race.startRace();
+            Result.printRoundResult(race.getCars());
+        }
+        List<Car> winner = Result.winnerDeter(race.getCars());
+        Result.printWinner(winner);
     }
 }
