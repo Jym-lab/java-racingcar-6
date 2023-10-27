@@ -63,6 +63,41 @@ class Input {
     }
 }
 
+class Result {
+    public static void printRoundResult(List<Car> cars){
+        for (Car car : cars){
+            System.out.println(car.getName() + " : " + "-".repeat(car.getPosition()));
+        }
+        System.out.println();
+    }
+    public static void winnerDeter(List<Car> cars){
+        int max = -1;
+        List<Car> winner = new ArrayList<>();
+        for (Car car : cars){
+            if (car.getPosition() > max){
+                max = car.getPosition();
+            }
+        }
+        for (Car car : cars){
+            if (car.getPosition() == max){
+                winner.add(car);
+            }
+        }
+        printWinner(winner);
+    }
+    private static void printWinner(List<Car> cars){
+        System.out.print("최종 우승자 : ");
+        for (int i = 0; i < cars.size(); i++){
+            Car car = cars.get(i);
+            if (i == cars.size() - 1){
+                System.out.println(car);
+            } else {
+                System.out.print(car + ", ");
+            }
+        }
+    }
+}
+
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현

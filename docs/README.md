@@ -16,6 +16,7 @@
 4. Result 클래스
    1. 각 라운드 별 결과를 출력하는 메서드(printRoundResult)
    2. 승자를 출력하는 메서드(printWinner)
+   3. 승자를 판별해내는 메서드(winnerDeter)
 5. ExceptionChecker 클래스
    1. 사용자가 입력한 자동차 이름이 문제가 없는지 검사(checkCarNames)
    2. 입력한 라운드 수가 유효한지 - 숫자가 아닌 경우 등(checkRound)
