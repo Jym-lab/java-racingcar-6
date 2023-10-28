@@ -114,7 +114,11 @@ class ExceptionChecker {
 
     public static int checkRound(String round){
         try{
-            return Integer.parseInt(round);
+            int number = Integer.parseInt(round);
+            if (number < 0){
+                throw new IllegalArgumentException("Negative numbers cannot be entered");
+            }
+            return number;
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("The input round value is not a number!");
         }
