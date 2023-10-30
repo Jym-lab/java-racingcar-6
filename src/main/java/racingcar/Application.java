@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 class Car {
@@ -57,14 +58,16 @@ class Input {
         for (int i = 0; i < carNames.length; i++){
             carNames[i] = carNames[i].strip();
         }
-        ExceptionChecker.checkCarNames(carNames);
+        ExceptionChecker.checkNameLength(carNames);
+        ExceptionChecker.checkDuplicate(carNames);
         return carNames;
     }
     public int getRound() {
         System.out.println("시도할 회수는 몇회인가요?");
-        String round = Console.readLine();
-        int roundNum = ExceptionChecker.checkRound(round);
-        return roundNum;
+        String input = Console.readLine();
+        int round = ExceptionChecker.checkNumber(input);
+        ExceptionChecker.checkNegativeNumber(round);
+        return round;
     }
 }
 
@@ -104,23 +107,29 @@ class Result {
 }
 
 class ExceptionChecker {
-    public static void checkCarNames(String[] carNames){
+    public static void checkDuplicate(String[] carNames){
+        if (Arrays.stream(carNames).distinct().count() != carNames.length){
+            throw new IllegalArgumentException("자동차 이름이 중복되었습니다.");
+        }
+    }
+    public static void checkNameLength(String[] carNames){
         for (String name : carNames){
-            if (name.length() > 5){
-                throw new IllegalArgumentException("The car name is longer than 5 characters.");
+            if (name.length() > 5 || name.isBlank()){
+                throw new IllegalArgumentException("자동차 이름은 5글자 이하 또는 공백은 불가합니다.");
             }
         }
     }
-
-    public static int checkRound(String round){
-        try{
-            int number = Integer.parseInt(round);
-            if (number < 0){
-                throw new IllegalArgumentException("Negative numbers cannot be entered");
-            }
-            return number;
+    public static int checkNumber(String round){
+        try {
+            return Integer.parseInt(round);
         } catch (NumberFormatException e){
-            throw new IllegalArgumentException("The input round value is not a number!");
+            throw new IllegalArgumentException("숫자로 변환이 불가합니다.");
+        }
+    }
+
+    public static void checkNegativeNumber(int round){
+        if (round < 0){
+            throw new IllegalArgumentException("음수는 입력 불가합니다.");
         }
     }
 }

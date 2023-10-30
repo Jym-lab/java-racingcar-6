@@ -23,17 +23,6 @@ class ApplicationTest extends NsTest {
             MOVING_FORWARD, STOP
         );
     }
-
-    @Test
-    void checkCarNames() {
-        String[] carNames = {"TestCar1", "TestCar2"};
-        assertThrows(IllegalArgumentException.class, () -> ExceptionChecker.checkCarNames(carNames));
-    }
-
-    @Test
-    void checkRound() {
-        assertThrows(IllegalArgumentException.class, () -> ExceptionChecker.checkRound("NotANumber"));
-    }
     @Test
     void 이름에_대한_예외_처리() {
         assertSimpleTest(() ->
